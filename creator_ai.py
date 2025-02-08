@@ -393,6 +393,7 @@ def chatbot_respond(search_results, length_filtered_urls):
     with chat_container:
         for msg in st.session_state.messages:
             st.chat_message(msg['role']).write(msg['content'])
+    chat.empty()
 
 # Main app
 def main():
