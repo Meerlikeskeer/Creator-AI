@@ -362,6 +362,8 @@ def process_diy_project(userInput, perplexity_instructables_link_type):
         length_filtered_urls = filter_strings_by_majority_length(scraped_filtered_urls)
     
     return url, search_results, length_filtered_urls
+def clear_text():
+    st.session_state["chat"] = ""
 def chatbot_respond(search_results, length_filtered_urls): 
     # Initialize session state for messages and images
     if 'messages' not in st.session_state:
@@ -377,7 +379,7 @@ def chatbot_respond(search_results, length_filtered_urls):
             type=['jpg', 'jpeg', 'png'], 
             help="Upload an image if you need help with your Creation"
         )
-        chat = st.text_input("Ask about your creation here")
+        chat = st.text_input("Ask about your creation here", key="text")
     # Process user input when the button is clicked
     if chat:
         # Process uploaded image if available
@@ -393,7 +395,7 @@ def chatbot_respond(search_results, length_filtered_urls):
     with chat_container:
         for msg in st.session_state.messages:
             st.chat_message(msg['role']).write(msg['content'])
-    chat = st.text_input("Ask about your creation here")
+    chat = st.set("Ask about your creation here")
 
 # Main app
 def main():
