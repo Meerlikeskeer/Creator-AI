@@ -11,8 +11,8 @@ from urllib.parse import urljoin, urlparse
 import re 
 
 # Initialize OpenAI client
-gptClient = OpenAI(api_key= OPENAI_API_KEY)
-perplexityClient = OpenAI(api_key=PERPLEXITY_API_KEY, base_url="https://api.perplexity.ai")
+gptClient = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+perplexityClient = OpenAI(api_key=st.secrets["PERPLEXITY_API_KEY"], base_url="https://api.perplexity.ai")
 
 # Function to encode the image
 def encode_image(image_path):
