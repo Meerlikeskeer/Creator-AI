@@ -180,7 +180,7 @@ def user_question_response(steps, prompt, image_decoded, image_paths):
                     "content": [
                         {
                             "type": "text",
-                            "text": "You are a master DIY creator. You love to teach and understand how to help if materials are missing. You can see images and search for images to respond. Just give the simplest way to finish the projects the user asks. Do not add additional instructions for anything which is optional, or not asked for. "
+                            "text": "You are a master DIY creator. You love to teach and understand how to help if materials are missing. You can see all images user uploads. Just give the simplest way to finish the projects the user asks. Do not add additional instructions for anything which is optional, or not asked for. "
                         }
                     ]
                 },
@@ -189,8 +189,8 @@ def user_question_response(steps, prompt, image_decoded, image_paths):
                     "content": [
                         {
                             "type": "text",
-                            "text": "You are able to see images, what is in this image"
-                            # "text": f"Here are the steps for the project: {steps}. Here is the user's question: {prompt} The first image is what the user has built, here is our database of image urls {image_paths}. Search the URLs to try to answer the User's Question and feel free to display a specific image from the from the urls or from your searching.",
+                            # "text": "You are able to see images, what is in this image"
+                            "text": f"Here are the steps for the project: {steps}. Here is the user's question: {prompt} You are able to see images and the user has uploaded one for you, here is our database of image urls {image_paths}. Try to answer the User's Question and feel free to display a specific image.",
                         },
                         {
                             "type": "image_url",
