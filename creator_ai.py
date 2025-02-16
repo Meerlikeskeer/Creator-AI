@@ -173,34 +173,26 @@ def user_question_response(steps, prompt, image_decoded, image_paths):
                 presence_penalty=0,
             )
         else:
-                messages=[ {
+            response1 = perplexityClient.chat.completions.create(
+            model="sonar",
+            messages=[
+                {
                     "role": "system",
-                    "content": [
-                        {
-                            "type": "text",
-                            "text": "You are a master DIY creator. You love to teach and understand how to help if materials are missing. You can see images, analyze and interpret them. Just give the simplest way to finish the projects the user asks. Do not add additional instructions for anything which is optional, or not asked for. Upload any useful image from the web which is relevant to the users questions."
-                        }
-                    ]
+                    "content": "You are a master DIY creator. You love to teach and understand how to help if materials are missing. You can see images, analyze and interpret them. Just give the simplest way to finish the projects the user asks. Do not add additional instructions for anything which is optional, or not asked for. Upload any useful image from the web which is relevant to the users questions."
                 },
                 {
                     "role": "user",
-                    "content": [
-                        {
-                            "type": "text",
-                            "text": f"Here are the steps for the project: {steps}. Here is the user's question: {prompt} The first image is what the user has built, here is our database of image urls {image_paths}. Search the URLs to try to answer the User's Question and feel free to display a specific image from the from the urls or from your searching.",
-                        },
-                        {
-                            "type": "image_url",
-                            "image_url": {
-                                "url":  f"data:image/jpeg;base64,{image_decoded}"
-                            },
-                        }
-                    ],
-                }]
-        response1 = perplexityClient.chat.completions.create(
-        model="llama-3.1-sonar-large-128k-online",
-        messages=messages,
-        )   
+                    "content": f"Here are the steps for the project: {steps}. Here is the user's question: {prompt} The first image is what the user has built, here is our database of image urls {image_paths}. Search the URLs to try to answer the User's Question and feel free to display a specific image from the from the urls or from your searching."
+                }
+            ],
+            max_tokens=2048,
+            temperature=0.75,
+            top_p=0.9,
+            frequency_penalty=1,
+            presence_penalty=0,
+            return_images=True
+            )
+    
         print(response1.choices[0].message.content)
         
         return response1.choices[0].message.content
