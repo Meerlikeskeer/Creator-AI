@@ -173,8 +173,8 @@ def user_question_response(steps, prompt, image_decoded, image_paths):
                 presence_penalty=0,
             )
         else:
-            response1 = perplexityClient.chat.completions.create(
-                model="sonar",
+            response1 = gptClient.chat.completions.create(
+                model="gpt-4o-mini",
                 messages=[
                 {
                     "role": "system",
