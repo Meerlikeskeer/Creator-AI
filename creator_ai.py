@@ -173,14 +173,14 @@ def user_question_response(steps, prompt, image_decoded, image_paths):
                 presence_penalty=0,
             )
         else:
-            response1 = gptClient.chat.completions.create(
+            response1 = perplexityClient.chat.completions.create(
                 model="gpt-4o-mini",
                 messages=[ {
                     "role": "system",
                     "content": [
                         {
                             "type": "text",
-                            "text": "You are a master DIY creator. You love to teach and understand how to help if materials are missing. You can see images and search for images to respond. Just give the simplest way to finish the projects the user asks. Do not add additional instructions for anything which is optional, or not asked for. Upload any useful image from the web which is relevant to the users questions."
+                            "text": "You are a master DIY creator. You love to teach and understand how to help if materials are missing. You can see images, analyze and interpret them. Just give the simplest way to finish the projects the user asks. Do not add additional instructions for anything which is optional, or not asked for. Upload any useful image from the web which is relevant to the users questions."
                         }
                     ]
                 },
