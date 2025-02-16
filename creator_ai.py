@@ -190,9 +190,8 @@ def user_question_response(steps, prompt, image_decoded, image_paths):
             top_p=0.9,
             frequency_penalty=1,
             presence_penalty=0,
-            return_images=True
             )
-    
+
         print(response1.choices[0].message.content)
         
         return response1.choices[0].message.content
