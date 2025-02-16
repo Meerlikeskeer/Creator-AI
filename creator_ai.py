@@ -173,8 +173,6 @@ def user_question_response(steps, prompt, image_decoded, image_paths):
                 presence_penalty=0,
             )
         else:
-            response1 = perplexityClient.chat.completions.create(
-                model="gpt-4o-mini",
                 messages=[ {
                     "role": "system",
                     "content": [
@@ -198,13 +196,11 @@ def user_question_response(steps, prompt, image_decoded, image_paths):
                             },
                         }
                     ],
-                }],
-                temperature=0.75,
-                max_tokens=2048,
-                top_p=1,
-                frequency_penalty=0,
-                presence_penalty=0,
-            )
+                }]
+        response1 = perplexityClient.chat.completions.create(
+        model="llama-3.1-sonar-large-128k-online",
+        messages=messages,
+        )   
         print(response1.choices[0].message.content)
         
         return response1.choices[0].message.content
