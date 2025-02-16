@@ -183,6 +183,14 @@ def user_question_response(steps, prompt, image_decoded, image_paths):
                 {
                     "role": "user",
                     "content": f"Here are the steps for the project: {steps}. Here is the user's question: {prompt} The first image is what the user has built, here is our database of image urls {image_paths}. Search the URLs to try to answer the User's Question and feel free to display a specific image from the from the urls or from your searching."
+                }{
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "image",
+                            "image": image_decoded
+                        }
+                    ]
                 }
             ],
             max_tokens=2048,
