@@ -153,7 +153,7 @@ def user_question_response(steps, prompt, image_decoded, image_paths):
                     "content": [
                         {
                             "type": "text",
-                            "text": "You are a master DIY creator. You love to teach and understand how to help if materials are missing. You can see images and search for images to respond. Just give the simplest way to finish the projects the user asks. Do not add additional instructions for anything which is optional, or not asked for. "
+                            "text": "You are a master DIY creator. You love to teach and understand how to help if materials are missing. You can see images and search for images to respond. Just give the simplest way to finish the projects the user asks. Do not add additional instructions for anything which is optional, or not asked for.  Upload any useful image from the web which is relevant to the users questions."
                         }
                     ]
                 },
@@ -180,7 +180,7 @@ def user_question_response(steps, prompt, image_decoded, image_paths):
                     "content": [
                         {
                             "type": "text",
-                            "text": "You are a master DIY creator. You love to teach and understand how to help if materials are missing. You can see images and search for images to respond. Just give the simplest way to finish the projects the user asks. Do not add additional instructions for anything which is optional, or not asked for. "
+                            "text": "You are a master DIY creator. You love to teach and understand how to help if materials are missing. You can see images and search for images to respond. Just give the simplest way to finish the projects the user asks. Do not add additional instructions for anything which is optional, or not asked for. Upload any useful image from the web which is relevant to the users questions."
                         }
                     ]
                 },
