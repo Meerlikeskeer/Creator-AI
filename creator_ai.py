@@ -173,33 +173,38 @@ def user_question_response(steps, prompt, image_decoded, image_paths):
                 presence_penalty=0,
             )
         else:
-            response1 = gptClient.chat.completions.create(
+             response1 = gptClient.chat.completions.create(
                 model="gpt-4o-mini",
-                messages=[
-                {
+                messages=[ {
                     "role": "system",
-                    "content": "You are a master DIY creator. You love to teach and understand how to help if materials are missing. You can see images, analyze and interpret them. Just give the simplest way to finish the projects the user asks. Do not add additional instructions for anything which is optional, or not asked for. Upload any useful image from the web which is relevant to the users questions."
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": "You are a master DIY creator. You love to teach and understand how to help if materials are missing. You can see images and search for images to respond. Just give the simplest way to finish the projects the user asks. Do not add additional instructions for anything which is optional, or not asked for. "
+                        }
+                    ]
                 },
                 {
                     "role": "user",
                     "content": [
-                    {
-                        "type": "text",
-                        "text": f"Here are the steps for the project: {steps}. Here is the user's question: {prompt} The first image is what the user has built, here is our database of image urls {image_paths}. Search the URLs to try to answer the User's Question and feel free to display a specific image from the from the urls or from your searching."
-                    },
-                    {
-                       "type": "image_url",
-                        "image_url": f"data:image/jpeg;base64,{image_decoded}"
-                    }
-                    ]
-                }
-                ],
-                max_tokens=2048,
+                        {
+                            "type": "text",
+                            "text": f"Here are the steps for the project: {steps}. Here is the user's question: {prompt} The first image is what the user has built, here is our database of image urls {image_paths}. Search the URLs to try to answer the User's Question and feel free to display a specific image from the from the urls or from your searching.",
+                        },
+                        {
+                            "type": "image_url",
+                            "image_url": {
+                                "url":  f"data:image/jpeg;base64,{image_decoded}"
+                            },
+                        }
+                    ],
+                }],
                 temperature=0.75,
-                top_p=0.9,
-                frequency_penalty=1,
+                max_tokens=2048,
+                top_p=1,
+                frequency_penalty=0,
                 presence_penalty=0,
-                )
+            )
         print(response1.choices[0].message.content)
         
         return response1.choices[0].message.content
