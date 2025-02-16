@@ -174,33 +174,32 @@ def user_question_response(steps, prompt, image_decoded, image_paths):
             )
         else:
             response1 = perplexityClient.chat.completions.create(
-            model="sonar",
-            messages=[
+                model="sonar",
+                messages=[
                 {
                     "role": "system",
                     "content": "You are a master DIY creator. You love to teach and understand how to help if materials are missing. You can see images, analyze and interpret them. Just give the simplest way to finish the projects the user asks. Do not add additional instructions for anything which is optional, or not asked for. Upload any useful image from the web which is relevant to the users questions."
                 },
                 {
                     "role": "user",
-                    "content": f"Here are the steps for the project: {steps}. Here is the user's question: {prompt} The first image is what the user has built, here is our database of image urls {image_paths}. Search the URLs to try to answer the User's Question and feel free to display a specific image from the from the urls or from your searching."
-                },
-                {
-                    "role": "user",
                     "content": [
-                        {
-                            "type": "image",
-                            "image": image_decoded
-                        }
+                    {
+                        "type": "text",
+                        "text": f"Here are the steps for the project: {steps}. Here is the user's question: {prompt} The first image is what the user has built, here is our database of image urls {image_paths}. Search the URLs to try to answer the User's Question and feel free to display a specific image from the from the urls or from your searching."
+                    },
+                    {
+                       "type": "image",
+                        "image": f"data:image/jpeg;base64,{image_decoded}"
+                    }
                     ]
                 }
-            ],
-            max_tokens=2048,
-            temperature=0.75,
-            top_p=0.9,
-            frequency_penalty=1,
-            presence_penalty=0,
-            )
-
+                ],
+                max_tokens=2048,
+                temperature=0.75,
+                top_p=0.9,
+                frequency_penalty=1,
+                presence_penalty=0,
+                )
         print(response1.choices[0].message.content)
         
         return response1.choices[0].message.content
