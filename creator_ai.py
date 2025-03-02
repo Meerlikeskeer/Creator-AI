@@ -434,7 +434,7 @@ def main():
         hidden_images = length_filtered_urls[3:]
 
         if len(hidden_images) > 0:
-            if selection == "Show Images":
+            if selection == "Show Extra Images":
                 for img_url in hidden_images:
                         hidden_images_column.image(img_url, width=500)
             else:
