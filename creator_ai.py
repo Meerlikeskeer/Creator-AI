@@ -301,7 +301,7 @@ def filter_strings_by_majority_length(strings):
     filtered_strings = [s for s in strings if len(s) >= majority_length]
    
     return filtered_strings
-@st.cache_data
+
 def display_project_results(is_valid_url, url, search_results, length_filtered_urls, _steps_column, _images_column):
     """
     Cached function to display project instructions and images
