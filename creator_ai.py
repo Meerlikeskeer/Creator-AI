@@ -400,7 +400,7 @@ def chatbot_respond(search_results, length_filtered_urls):
 
 # Main app
 def main():
-
+    options = ["Show Extra Images", "Hide Extra Images"]
     userInput = st.text_area("Describe your DIY project")
     selection = st.segmented_control(
             "", options, selection_mode="single")
@@ -432,7 +432,6 @@ def main():
         )
         column, hidden_images_column = st.columns(2, vertical_alignment="top")
         hidden_images = length_filtered_urls[3:]
-        options = ["Show Extra Images", "Hide Extra Images"]
 
         if len(hidden_images) > 0:
             if selection == "Show Images":
