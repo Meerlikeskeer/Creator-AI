@@ -431,14 +431,15 @@ def main():
             step_column, 
             images_column
         )
-        hidden_images = length_filtered_urls[3:]
-        hidden_images_container = images_column.container()
-        if len(hidden_images) > 0:
+        if len(length_filtered_urls[3:]) > 0:
             if selection == "Show Extra Images":
-                for img_url in hidden_images:
-                        hidden_images_container.image(img_url, width=500)
+                for img_url in length_filtered_urls[3:]:
+                        images_column.image(img_url, width=500)
             else:
-                hidden_images_container.clear()
+                images_column.clear()
+                for img_url in length_filtered_urls[:3]:
+                        images_column.image(img_url, width=500)
+
         st.header("Need Help?")
         chatbot_respond(search_results, length_filtered_urls)
         
