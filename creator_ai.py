@@ -110,7 +110,7 @@ def perplexity_search_steps(userInput, instructablesLink):
 
     # chat completion without streaming
     response = perplexityClient.chat.completions.create(
-        model="llama-3.1-sonar-large-128k-online",
+        model="sonar-pro",
         messages=messages,
     )
     print(response.choices[0].message.content)
@@ -278,7 +278,7 @@ def perplexity_search_link(userInput):
     
     # chat completion without streaming
     response = perplexityClient.chat.completions.create(
-        model="llama-3.1-sonar-large-128k-online",
+        model="sonar-pro",
         messages=messages,
     )
     print("TESTING PERPLEXITY: "+response.choices[0].message.content)
