@@ -436,7 +436,7 @@ def main():
                 for img_url in length_filtered_urls[3:]:
                         images_column.image(img_url, width=500)
             else:
-                images_column.clear()
+                images_column.empty()
                 for img_url in length_filtered_urls[:3]:
                         images_column.image(img_url, width=500)
 
