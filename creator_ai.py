@@ -302,7 +302,7 @@ def filter_strings_by_majority_length(strings):
    
     return filtered_strings
 @st.cache_data
-def display_project_results(is_valid_url, url, search_results, length_filtered_urls):
+def display_project_results(is_valid_url, url, search_results, length_filtered_urls, steps_column, images_column):
     """
     Cached function to display project instructions and images
     
@@ -317,7 +317,6 @@ def display_project_results(is_valid_url, url, search_results, length_filtered_u
     """
     if is_valid_url:
         print("IF STATEMENT")
-        steps_column, images_column = st.columns(2, vertical_alignment="top")
         images_column.header("Images")
         steps_column.header("Instructions")
         steps_column.write(search_results) 
@@ -402,8 +401,8 @@ def chatbot_respond(search_results, length_filtered_urls):
 def main():
     options = ["Show Extra Images", "Hide Extra Images"]
     userInput = st.text_area("Describe your DIY project")
-    column, hidden_images_column = st.columns(2, vertical_alignment="top")
-    selection = hidden_images_column.segmented_control(
+    step_column, images_column = st.columns(2, vertical_alignment="top")
+    selection = images_column.segmented_control(
             "", options, selection_mode="single", )
     if st.text_input and userInput != "": 
         st.header(userInput)
@@ -429,16 +428,18 @@ def main():
             is_valid_instructables_url(url), 
             url, 
             search_results, 
-            length_filtered_urls
+            length_filtered_urls, 
+            step_column, 
+            images_column
         )
         hidden_images = length_filtered_urls[3:]
-
+        hidden_images_container = images_column.container()
         if len(hidden_images) > 0:
             if selection == "Show Extra Images":
                 for img_url in hidden_images:
-                        hidden_images_column.image(img_url, width=500)
+                        hidden_images_container.image(img_url, width=500)
             else:
-                hidden_images_column.empty()
+                hidden_images_container.clear()
         st.header("Need Help?")
         chatbot_respond(search_results, length_filtered_urls)
         
