@@ -431,9 +431,9 @@ def main():
         hidden_images = length_filtered_urls[3:]
         if hidden_images:
             if st.button("View More Images"):
+                hidden_images_column = st.columns(1, vertical_alignment="top")
                 for img_url in hidden_images:
-                    with st.columns(2):
-                        st.image(img_url, width=500)
+                        hidden_images_column.image(img_url, width=500)
         st.header("Need Help?")
         chatbot_respond(search_results, length_filtered_urls)
         
