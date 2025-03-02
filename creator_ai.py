@@ -22,7 +22,6 @@ def encode_image(image_path):
 keyword = "keyword"
 image_link_type = "https://content.instructables.com"
 perplexity_instructables_link_type = "https://www.instructables.com/"
-steps_column, images_column = st.columns(2, vertical_alignment="top")
 introductions = [
         "Hi, I'm your DIY guide, ready to simplify your projects with creative solutions. Feel free to ask me any questions along the way.",
         "Hello, I specialize in making DIY tasks easy, even when you're missing materials. I’m here to answer your questions anytime.",
@@ -302,11 +301,6 @@ def filter_strings_by_majority_length(strings):
     filtered_strings = [s for s in strings if len(s) >= majority_length]
    
     return filtered_strings
-def display_hidden_images(length_filtered_urls, column):
-        num_initial_images = 3
-        hidden_images = length_filtered_urls[num_initial_images:]
-        # Button to show more images
-
 @st.cache_data
 def display_project_results(is_valid_url, url, search_results, length_filtered_urls):
     """
@@ -323,6 +317,7 @@ def display_project_results(is_valid_url, url, search_results, length_filtered_u
     """
     if is_valid_url:
         print("IF STATEMENT")
+        steps_column, images_column = st.columns(2, vertical_alignment="top")
         images_column.header("Images")
         steps_column.header("Instructions")
         steps_column.write(search_results) 
@@ -332,7 +327,6 @@ def display_project_results(is_valid_url, url, search_results, length_filtered_u
         displayed_images = length_filtered_urls[:num_initial_images]
         for img_url in displayed_images:
             images_column.image(img_url, width=500)
-        display_hidden_images(length_filtered_urls, images_column)
     else:
         print("ELSE STATEMENT")
         steps_column = st.columns(1, vertical_alignment="top")
@@ -438,7 +432,8 @@ def main():
         if hidden_images:
             if st.button("View More Images"):
                 for img_url in hidden_images:
-                    images_column.image(img_url, width=500)
+                    with st.columns(2):
+                        st.image(img_url, width=500)
         st.header("Need Help?")
         chatbot_respond(search_results, length_filtered_urls)
         
