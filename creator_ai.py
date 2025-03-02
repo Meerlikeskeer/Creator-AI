@@ -429,7 +429,7 @@ def main():
             length_filtered_urls
         )
         hidden_images = length_filtered_urls[3:]
-        if hidden_images.count > 0:
+        if len(hidden_images) > 0:
             if st.button("View More Images"):
                 column, hidden_images_column = st.columns(2, vertical_alignment="top")
                 for img_url in hidden_images:
