@@ -429,9 +429,9 @@ def main():
             length_filtered_urls
         )
         hidden_images = length_filtered_urls[3:]
-        if hidden_images:
+        if hidden_images.count > 0:
             if st.button("View More Images"):
-                hidden_images_column = st.columns(1, vertical_alignment="top")
+                column, hidden_images_column = st.columns(2, vertical_alignment="top")
                 for img_url in hidden_images:
                         hidden_images_column.image(img_url, width=500)
         st.header("Need Help?")
