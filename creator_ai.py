@@ -317,20 +317,19 @@ def display_project_results(is_valid_url, url, search_results, length_filtered_u
     """
     if is_valid_url:
         print("IF STATEMENT")
-        images_column.header("Images")
-        steps_column.header("Instructions")
-        steps_column.write(search_results) 
+        _steps_column.header("Images")
+        _images_column.header("Instructions")
+        _images_column.write(search_results) 
     
         # Show first three images
         num_initial_images = 3
         displayed_images = length_filtered_urls[:num_initial_images]
         for img_url in displayed_images:
-            images_column.image(img_url, width=500)
+            _steps_column.image(img_url, width=500)
     else:
         print("ELSE STATEMENT")
-        steps_column = st.columns(1, vertical_alignment="top")
-        steps_column.header("Instructions")
-        steps_column.write(search_results)
+        _steps_column.header("Instructions")
+        _steps_column.write(search_results)
         
         # return steps_column, None
     
