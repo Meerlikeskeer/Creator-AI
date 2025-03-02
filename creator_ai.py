@@ -22,7 +22,7 @@ def encode_image(image_path):
 keyword = "keyword"
 image_link_type = "https://content.instructables.com"
 perplexity_instructables_link_type = "https://www.instructables.com/"
-
+steps_column, images_column = st.columns(2, vertical_alignment="top")
 introductions = [
         "Hi, I'm your DIY guide, ready to simplify your projects with creative solutions. Feel free to ask me any questions along the way.",
         "Hello, I specialize in making DIY tasks easy, even when you're missing materials. I’m here to answer your questions anytime.",
@@ -306,10 +306,7 @@ def display_hidden_images(length_filtered_urls, column):
         num_initial_images = 3
         hidden_images = length_filtered_urls[num_initial_images:]
         # Button to show more images
-        if hidden_images:
-            if st.button("View More Images"):
-                for img_url in hidden_images:
-                    column.image(img_url, width=500)
+
 @st.cache_data
 def display_project_results(is_valid_url, url, search_results, length_filtered_urls):
     """
@@ -326,7 +323,6 @@ def display_project_results(is_valid_url, url, search_results, length_filtered_u
     """
     if is_valid_url:
         print("IF STATEMENT")
-        steps_column, images_column = st.columns(2, vertical_alignment="top")
         images_column.header("Images")
         steps_column.header("Instructions")
         steps_column.write(search_results) 
@@ -431,14 +427,18 @@ def main():
         }
         </style>
         """, unsafe_allow_html=True)
-
+        
         display_project_results(
             is_valid_instructables_url(url), 
             url, 
             search_results, 
             length_filtered_urls
         )
-
+        hidden_images = length_filtered_urls[3:]
+        if hidden_images:
+            if st.button("View More Images"):
+                for img_url in hidden_images:
+                    images_column.image(img_url, width=500)
         st.header("Need Help?")
         chatbot_respond(search_results, length_filtered_urls)
         
