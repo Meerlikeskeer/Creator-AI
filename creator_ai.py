@@ -428,12 +428,18 @@ def main():
             search_results, 
             length_filtered_urls
         )
+        column, hidden_images_column = st.columns(2, vertical_alignment="top")
         hidden_images = length_filtered_urls[3:]
+        options = ["Show Images", "Hide Images"]
+        selection = st.segmented_control(
+            "", options, selection_mode="single"
+        )
         if len(hidden_images) > 0:
-            if st.button("View More Images"):
-                column, hidden_images_column = st.columns(2, vertical_alignment="top")
+            if selection == "Show Images":
                 for img_url in hidden_images:
                         hidden_images_column.image(img_url, width=500)
+            else:
+                hidden_images_column.empty()
         st.header("Need Help?")
         chatbot_respond(search_results, length_filtered_urls)
         
