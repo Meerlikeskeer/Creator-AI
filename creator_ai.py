@@ -437,8 +437,6 @@ def main():
                         images_column.image(img_url, width=500)
             else:
                 images_column.empty()
-                for img_url in length_filtered_urls[:3]:
-                        images_column.image(img_url, width=500)
 
         st.header("Need Help?")
         chatbot_respond(search_results, length_filtered_urls)
