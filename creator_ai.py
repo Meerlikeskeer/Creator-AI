@@ -302,6 +302,14 @@ def filter_strings_by_majority_length(strings):
     filtered_strings = [s for s in strings if len(s) >= majority_length]
    
     return filtered_strings
+def display_hidden_images(length_filtered_urls, column):
+        num_initial_images = 3
+        hidden_images = length_filtered_urls[num_initial_images:]
+        # Button to show more images
+        if hidden_images:
+            if st.button("View More Images"):
+                for img_url in hidden_images:
+                    column.image(img_url, width=500)
 @st.cache_data
 def display_project_results(is_valid_url, url, search_results, length_filtered_urls):
     """
@@ -326,15 +334,9 @@ def display_project_results(is_valid_url, url, search_results, length_filtered_u
         # Show first three images
         num_initial_images = 3
         displayed_images = length_filtered_urls[:num_initial_images]
-        hidden_images = length_filtered_urls[num_initial_images:]
         for img_url in displayed_images:
             images_column.image(img_url, width=500)
-        # Button to show more images
-        if hidden_images:
-            if st.button("View More Images"):
-                for img_url in hidden_images:
-                    images_column.image(img_url, width=500)
-    
+        display_hidden_images(length_filtered_urls, images_column)
     else:
         print("ELSE STATEMENT")
         steps_column = st.columns(1, vertical_alignment="top")
@@ -369,6 +371,8 @@ def process_diy_project(userInput, perplexity_instructables_link_type):
         length_filtered_urls = filter_strings_by_majority_length(scraped_filtered_urls)
     
     return url, search_results, length_filtered_urls
+
+
 def clear_text():
     st.session_state["chat"] = ""
 def chatbot_respond(search_results, length_filtered_urls): 
