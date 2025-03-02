@@ -398,7 +398,7 @@ def chatbot_respond(search_results, length_filtered_urls):
 
 # Main app
 def main():
-    options = ["Show Extra Images", "Hide Extra Images"]'
+    options = ["Show Extra Images", "Hide Extra Images"]
     headertext = st.header("What DIY project would you like to create today?")
     userInput = st.text_area("Describe your DIY project")
     step_column, images_column = st.columns(2, vertical_alignment="top")
